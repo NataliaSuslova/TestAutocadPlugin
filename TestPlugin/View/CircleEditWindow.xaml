@@ -1,0 +1,68 @@
+﻿<Window x:Class="TestPlugin.CircleEditWindow"
+        x:Name="CircleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        Height="395" 
+        Width="240">
+    <Window.Resources>
+        <ResourceDictionary 
+            Source="ViewLibrary\EditStyle.xaml" />
+    </Window.Resources>
+    <Border 
+        MouseLeftButtonDown="WindowDragMove">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel 
+                Grid.Row="0">
+                <Label 
+                    Style="{StaticResource HeaderEditStyle}" 
+                    Content="Редактирование окружности" />
+                <Label 
+                    Content="X:"/>
+                <TextBox 
+                    Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" />
+                <Label  
+                    Content="Y:" />
+                <TextBox 
+                    Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" />
+                <Label  
+                    Content="Z:" />
+                <TextBox 
+                    Text="{Binding Z, UpdateSourceTrigger=PropertyChanged}" />
+                <Label 
+                    Content="R:" />
+                <TextBox 
+                    Text="{Binding Radius, UpdateSourceTrigger=PropertyChanged}" />
+                <Label 
+                    Content="H:" />
+                <TextBox 
+                    Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="0" 
+                    Content="ОК" 
+                    Command="{Binding OKClose}" 
+                    CommandParameter="{Binding ElementName=CircleWindow}"/>
+                <Button 
+                    Grid.Column="1" 
+                    Content="Отмена" 
+                    Command="{Binding CancelClose}" 
+                    CommandParameter="{Binding ElementName=CircleWindow}" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
