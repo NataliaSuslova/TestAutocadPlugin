@@ -1,8 +1,16 @@
 ﻿namespace TestPlugin
 {
+    /// <summary>
+    /// Модель представления редактирования окружности
+    /// </summary>
     public class CircleEditViewModel : BaseWindowViewModel
     {
+        // Вспомогательная модель окружности, 
+        // изменяется во время редактирования
         private PrimitiveCircle currentCircle;
+
+        // Модель окружности для редактирования, изменяется
+        // по окончанию работы редактора только после подтверждения
         private PrimitiveCircle baseCircle;
 
         public CircleEditViewModel(PrimitiveCircle circle)
@@ -10,6 +18,7 @@
             this.baseCircle = circle;
             this.currentCircle = (PrimitiveCircle)circle.Clone();
         }
+
         public double Radius
         {
             get
@@ -35,6 +44,8 @@
                 OnPropertyChanged("Height");
             }
         }
+
+        // Координаты центра окружности
 
         public double X
         {
@@ -75,6 +86,7 @@
             }
         }
 
+        // Вносит изменения в модель окружности
         public override void Update()
         {
             baseCircle.Update(currentCircle);

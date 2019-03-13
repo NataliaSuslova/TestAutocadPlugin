@@ -1,15 +1,21 @@
 ﻿namespace TestPlugin
 {
+    /// <summary>
+    /// Модель окружности
+    /// </summary>
     public class PrimitiveCircle : Primitive
     {
         public PrimitiveCircle()
         {           
         }
 
+        // Координаты центра окружности
         public Point3D Center { get; set; }
 
         public double Radius { get; set; }
 
+        // Отображает текущие значения редактируемых свойств
+        // окружности: координаты центра, радиус, высота
         public override string Display
         {
             get
@@ -19,6 +25,7 @@
             }
         }
 
+        // Запускает окно редактирования окружности
         public override void Edit(object obj)
         {
             var circleEditViewModel = new CircleEditViewModel((PrimitiveCircle)obj);
@@ -26,6 +33,7 @@
             circleEditWindow.ShowDialog();
         }
 
+        // Копия окружности, содержащая свойства для редактирования
         public override object Clone()
         {
             return new PrimitiveCircle
@@ -36,6 +44,7 @@
             };
         }
 
+        // Обновляет свойства окружности
         public override void Update(AutocadObject obj)
         {
             var circle = (PrimitiveCircle)obj;

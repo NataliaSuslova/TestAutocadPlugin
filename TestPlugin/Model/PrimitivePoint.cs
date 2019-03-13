@@ -1,13 +1,19 @@
 ﻿namespace TestPlugin
 {
+    /// <summary>
+    /// Модель точки
+    /// </summary>
     public class PrimitivePoint : Primitive
     {
         public PrimitivePoint()
         {        
         }
 
+        // Координаты точки
         public Point3D Position { get; set; }
 
+        // Отображает значения редактируемых свойств точки:
+        // координаты и высота
         public override string Display
         {
             get
@@ -17,6 +23,7 @@
             }
         }
 
+        // Запускает окно редактирования точки
         public override void Edit(object obj)
         {
             var pointEditViewModel = new PointEditViewModel((PrimitivePoint)obj);
@@ -24,6 +31,7 @@
             pointEditWindow.ShowDialog();
         }
 
+        // Копия точки, содержащая свойства для редактирования
         public override object Clone()
         {
             return new PrimitivePoint
@@ -33,6 +41,7 @@
             };
         }
 
+        // Обновляет свойства точки
         public override void Update(AutocadObject obj)
         {
             var point = (PrimitivePoint)obj;

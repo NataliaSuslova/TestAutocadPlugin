@@ -1,8 +1,16 @@
 ﻿namespace TestPlugin
 {
+    /// <summary>
+    /// Модель представления точки
+    /// </summary>
     public class PointEditViewModel : BaseWindowViewModel
     {
+        // Вспомогательная модель точки,
+        // изменяется во время редактирования
         private PrimitivePoint currentPoint;
+
+        // Модель точки для редактирования,
+        // изменяется после подтверждения
         private PrimitivePoint basePoint;
 
         public PointEditViewModel(PrimitivePoint point)
@@ -23,6 +31,8 @@
                 OnPropertyChanged("Height");
             }
         }
+
+        // Координаты точки
 
         public double X
         {
@@ -63,6 +73,7 @@
             }
         }
 
+        // Вносит изменения в модель точки
         public override void Update()
         {
             basePoint.Update(currentPoint);

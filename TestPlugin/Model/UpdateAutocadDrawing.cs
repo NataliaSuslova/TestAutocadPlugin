@@ -5,8 +5,14 @@ using Autodesk.AutoCAD.EditorInput;
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Изменяет свойства слоев и примитивов в БД Автокада
+    /// в соответствии с результатами редактирования коллекции
+    /// моделей слоев и примитивов
+    /// </summary>
     public class UpdateAutocadDrawing
     {
+        // Коллекция моделей слоев и примитивов после редактирования
         private ObservableCollection<Layer> layersCollection;
 
         public UpdateAutocadDrawing(ObservableCollection<Layer> layersCollection)
@@ -14,10 +20,11 @@ namespace TestPlugin
             this.layersCollection = layersCollection;
         }
 
+        // Изменяет свойства объектов Автокада в соответствии c
+        // отредактированной коллекцией моделей слоев и примитивов
         public void Update()
         {
             Document doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
-            Editor ed = doc.Editor;
             Database db = doc.Database;
 
             using (Transaction tr = db.TransactionManager.StartTransaction())
@@ -28,9 +35,10 @@ namespace TestPlugin
                 {
                     foreach (Primitive primitive in layer.Primitives)
                     {
+                        // Редактирование окружностей
                         if (primitive is PrimitiveCircle)
                         {
-                            PrimitiveCircle pc = primitive as PrimitiveCircle;
+                            var pc = primitive as PrimitiveCircle;
                             Circle cir = tr.GetObject(pc.ID, OpenMode.ForWrite, false, true) as Circle;
                             try
                             {                        
@@ -44,9 +52,10 @@ namespace TestPlugin
                             }
                         }
 
+                        // Редактирование отрезков
                         if (primitive is PrimitiveLine)
                         {
-                            PrimitiveLine pl = (PrimitiveLine)primitive;
+                            var pl = (PrimitiveLine)primitive;
                             Line line = tr.GetObject(pl.ID, OpenMode.ForWrite, false, true) as Line;
                             try
                             {
@@ -60,9 +69,10 @@ namespace TestPlugin
                             }                           
                         }
 
+                        // Редактирование точек
                         if (primitive is PrimitivePoint)
                         {
-                            PrimitivePoint pp = (PrimitivePoint)primitive;
+                            var pp = (PrimitivePoint)primitive;
                             DBPoint point = tr.GetObject(pp.ID, OpenMode.ForWrite, false, true) as DBPoint;
                             try
                             {
@@ -76,6 +86,7 @@ namespace TestPlugin
                         }
                     }
 
+                    // Редактирование слоев
                     LayerTableRecord layerTableRecord = tr.GetObject(layer.ID, OpenMode.ForWrite, false, true) as LayerTableRecord;
                     try
                     {

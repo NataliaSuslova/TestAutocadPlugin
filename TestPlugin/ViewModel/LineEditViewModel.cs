@@ -1,8 +1,16 @@
 ﻿namespace TestPlugin
 {
+    /// <summary>
+    /// Модель преставления редактирования отрезка
+    /// </summary>
     public class LineEditViewModel : BaseWindowViewModel
     {
+        // Вспомогательная модель отрезка, 
+        // изменяющаяся во время редактирования
         private PrimitiveLine currentLine;
+
+        // Модель отрезка для редактирования, изменяется 
+        // только при подтверждении
         private PrimitiveLine baseLine;
 
         public LineEditViewModel(PrimitiveLine line)
@@ -23,6 +31,8 @@
                 OnPropertyChanged("Height");
             }
         }
+
+        // Координаты начальной точки отрезка
 
         public double X1
         {
@@ -63,6 +73,8 @@
             }
         }
 
+        // Координаты конечной точки отрезка
+
         public double X2
         {
             get
@@ -102,6 +114,7 @@
             }
         }
 
+        // Вносит изменения в модель отрезка
         public override void Update()
         {
             baseLine.Update(currentLine);

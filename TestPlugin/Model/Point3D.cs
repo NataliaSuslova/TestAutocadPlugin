@@ -2,6 +2,9 @@
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Модель координат точки X, Y, Z в трехмерном пространстве
+    /// </summary>
     public class Point3D : ICloneable
     {
         protected double x;
@@ -61,11 +64,13 @@ namespace TestPlugin
             }
         }
 
+        // Отображает координаты в виде: [x,y,z]
         public override string ToString()
         {
             return string.Format("[{0},{1},{2}]", X, Y, Z);
         }
 
+        // Копия координат точки
         public object Clone()
         {
             return new Point3D(this.x, this.y, this.z);

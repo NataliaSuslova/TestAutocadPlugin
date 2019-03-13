@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Модель представления главного окна
+    /// </summary>
     public class MainViewModel : BaseWindowViewModel
     {
         public MainViewModel()
@@ -10,6 +13,8 @@ namespace TestPlugin
             Layers = new LayersCollection();
         }
 
+        // Коллекция моделей слоев и входящих в них примитивов,
+        // предназначенная для редатирования
         private ObservableCollection<Layer> layers;
         public ObservableCollection<Layer> Layers
         {
@@ -25,6 +30,8 @@ namespace TestPlugin
             }
         }
 
+        // При подтверждении вносит изменения свойств
+        // слоев и примитивов в чертёж Автокада
         public override void Update()
         {
             var updateAutocadDrawing = new UpdateAutocadDrawing(Layers);

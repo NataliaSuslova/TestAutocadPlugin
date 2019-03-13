@@ -5,6 +5,9 @@ using System.Windows.Media;
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Модель слоя
+    /// </summary>
     public class Layer : AutocadObject
     {
         public Layer()
@@ -12,6 +15,7 @@ namespace TestPlugin
             primitives = new ObservableCollection<Primitive> { };
         }
 
+        // Название слоя
         private string name;
         public override string Name
         {
@@ -26,10 +30,13 @@ namespace TestPlugin
             }
         }
 
+        // Видимость слоя
         public bool Visibility { get; set; }
 
+        // Цвет слоя
         public Color LayerColor { get; set; }
 
+        // Коллекция примитивов, принадлежащих слою
         private ObservableCollection<Primitive> primitives;
         public ObservableCollection<Primitive> Primitives
         {
@@ -44,6 +51,8 @@ namespace TestPlugin
             }
         }
 
+        // Группирует коллекцию по видам примитивов:
+        // точки, окружности, отрезки
         public ICollectionView PrimitivesGroup
         {
             get
@@ -54,6 +63,7 @@ namespace TestPlugin
             }
         }
 
+        // Отображает свойства слоя: цвет и видимость
         public override string Display
         {
             get
@@ -63,6 +73,7 @@ namespace TestPlugin
             }
         }
 
+        // Запускает окно редактирования слоя
         public override void Edit(object obj)
         {
             var layerEditViewModel = new LayerEditViewModel((Layer)obj);
@@ -70,6 +81,7 @@ namespace TestPlugin
             layerEditWindow.ShowDialog();
         }
 
+        // Копия слоя, содержащая свойства для редактирования
         public override object Clone()
         {
             return new Layer
@@ -80,6 +92,7 @@ namespace TestPlugin
             };
         }
 
+        // Обновляет свойства слоя
         public override void Update(AutocadObject obj)
         {
             Layer layer = (Layer)obj;

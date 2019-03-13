@@ -4,9 +4,17 @@ using System.Windows.Media;
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Модель представления редактирования слоя
+    /// </summary>
     public class LayerEditViewModel : BaseWindowViewModel
     {
+        // Вспомогательная модель слоя,
+        // изменяется во время редактирования
         private Layer currentLayer;
+
+        // Модель слоя для редактирования, 
+        // изменяется только после подтверждения
         private Layer baseLayer;
 
         public LayerEditViewModel(Layer layer)
@@ -15,6 +23,7 @@ namespace TestPlugin
             currentLayer = (Layer)layer.Clone();
         }
 
+        // Название слоя
         public string Name
         {
             get
@@ -28,6 +37,7 @@ namespace TestPlugin
             }
         }
 
+        // Видимость
         public bool Visibility
         {
             get
@@ -41,6 +51,7 @@ namespace TestPlugin
             }
         }
 
+        // Цвет слоя
         public SolidColorBrush LayerColor
         {
             get
@@ -54,6 +65,7 @@ namespace TestPlugin
             }
         }
 
+        // Команда для запуска окна редактирования цвета слоя
         private RelayCommand editColor;
         public ICommand EditColor
         {
@@ -65,6 +77,8 @@ namespace TestPlugin
             }
         }
 
+        // Запускает окно редактирования цвета и 
+        // сохраняет выбранный цвет при подтверждении
         private void EditLayerColor(Object obj)
         {
             var colorPickerViewModel = new ColorPickerViewModel(LayerColor);
@@ -73,6 +87,7 @@ namespace TestPlugin
             LayerColor = colorPickerViewModel.StartColor;
         }
 
+        // Вносит изменения в модель слоя
         public override void Update()
         {
             baseLayer.Update(currentLayer);

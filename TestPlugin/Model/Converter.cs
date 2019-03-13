@@ -5,8 +5,13 @@ using System.Windows.Media;
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Преобразует объекты БД Автокада в модели объектов,
+    /// а также согласует их свойства между собой
+    /// </summary>
     public class Converter
     {
+        // Модель слоя из объекта LayerTableRecord
         public Layer Layer(LayerTableRecord layer)
         {
             return new Layer
@@ -18,6 +23,7 @@ namespace TestPlugin
             };
         }
 
+        // Модель точки из объекта DBPoint
         public PrimitivePoint PrimitivePoint(DBPoint point)
         {
             return new PrimitivePoint()
@@ -30,6 +36,7 @@ namespace TestPlugin
             };
         }
 
+        // Модель окружности из объекта Circle
         public PrimitiveCircle PrimitiveCircle(Circle circle)
         {
             return new PrimitiveCircle()
@@ -43,6 +50,7 @@ namespace TestPlugin
             };
         }
 
+        // Модель отрезка из объекта Line
         public PrimitiveLine PrimitiveLine(Line line)
         {
             return new PrimitiveLine()
@@ -56,16 +64,19 @@ namespace TestPlugin
             };
         }
 
+        // Координаты модели из координат объекта БД Автокада
         public Point3D Point3D(Point3d point)
         {
             return new Point3D(point.X, point.Y, point.Z);
         }
 
+        // Координаты объекта БД Автокада из координат модели
         public Point3d Point3d(Point3D point)
         {
             return new Point3d(point.X, point.Y, point.Z);
         }
 
+        // Получение цвета для модели слоя
         public System.Windows.Media.Color LayerColor(Autodesk.AutoCAD.Colors.Color AcadColor)
         {
             if (!AcadColor.IsByAci)
@@ -110,6 +121,7 @@ namespace TestPlugin
             }
         }
 
+        // Преобразование цвета из модели слоя в объект Автокада
         public Autodesk.AutoCAD.Colors.Color AcadColor(System.Windows.Media.Color LayerColor)
         {
             return Autodesk.AutoCAD.Colors.Color.FromRgb(LayerColor.R, LayerColor.G, LayerColor.B);

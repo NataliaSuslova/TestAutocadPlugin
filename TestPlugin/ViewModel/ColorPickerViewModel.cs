@@ -2,6 +2,9 @@
 
 namespace TestPlugin
 {
+    /// <summary>
+    /// Модель представления выбора цвета
+    /// </summary>
     public class ColorPickerViewModel : BaseWindowViewModel
     {
         public ColorPickerViewModel(SolidColorBrush startColor)
@@ -13,7 +16,11 @@ namespace TestPlugin
             UpdateColor();
         }
 
+        // Изначальный цвет, до редактирования
         public SolidColorBrush StartColor { get; set; }
+
+        // Значения красного, синего и зеленого в
+        // цветовой модели RGB для текущего цвета
 
         private byte red;
         public byte Red
@@ -60,6 +67,7 @@ namespace TestPlugin
             }
         }
 
+        // Текущий цвет в редакторе
         private SolidColorBrush finishColor;
         public SolidColorBrush FinishColor
         {
@@ -73,6 +81,9 @@ namespace TestPlugin
                 OnPropertyChanged("FinishColor");
             }
         }
+
+        // Начальное и конечное значения градиента красного при
+        // текущих значениях синего и зеленого
 
         private Color gradientRedColorA;
         public Color GradientRedColorA
@@ -102,6 +113,9 @@ namespace TestPlugin
             }
         }
 
+        // Начальное и конечное значения градиента зеленого при
+        // текущих значениях синего и красного
+
         private Color gradientGreenColorA;
         public Color GradientGreenColorA
         {
@@ -129,6 +143,9 @@ namespace TestPlugin
                 OnPropertyChanged("GradientGreenColorB");
             }
         }
+
+        // Начальное и конечное значения градиента синего при
+        // текущих значениях красного и зеленого
 
         private Color gradientBlueColorA;
         public Color GradientBlueColorA
@@ -158,6 +175,8 @@ namespace TestPlugin
             }
         }
 
+        // Изменяет текущий цвет и градиенты цветов при
+        // изменении значений красного, синего или зеленого
         void UpdateColor()
         {
             FinishColor = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
@@ -169,6 +188,7 @@ namespace TestPlugin
             GradientBlueColorB = Color.FromRgb(Red, Green, 255);
         }
 
+        // Вносит изменения в цвет слоя при подтверждении
         public override void Update()
         {
             StartColor = FinishColor;

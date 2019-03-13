@@ -98,7 +98,7 @@
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Model\UpdateAutocadDrawing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ViewLibrary\IClosable.cs" />
+    <Compile Include="ViewModelLibrary\IClosable.cs" />
     <Compile Include="ViewModelLibrary\BaseViewModel.cs" />
     <Compile Include="ViewModelLibrary\BaseWindowViewModel.cs" />
     <Compile Include="ViewModel\CircleEditViewModel.cs" />
